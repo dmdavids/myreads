@@ -1,7 +1,16 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class ListContent extends Component {
+  static propTypes = {
+    books: PropTypes.array.isRequired,
+  };
+
   render() {
+    const { books } = this.props;
+
+    console.log(books)
+    
     return (
       <div className="list-books-content">
         <div>

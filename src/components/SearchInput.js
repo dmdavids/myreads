@@ -1,7 +1,14 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class SearchInput extends Component {
+  static propTypes = {
+    searchBooks: PropTypes.func.isRequired
+  };
+
   render() {
+   // const { searchBooks } = this.props;
+
     return (
       <div className="search-books-input-wrapper">
         {/*
