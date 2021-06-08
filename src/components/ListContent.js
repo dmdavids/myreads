@@ -9,14 +9,15 @@ class ListContent extends Component {
 
   render() {
     const { books } = this.props;
-
-    console.log(books);
+    const categories = [...new Set(books.map((b) => (b.shelf)))]
 
     return (
       <div className="list-books-content">
         <div>
-          <Bookshelf />
-          <Bookshelf />
+          { categories.map((category) => (
+            <Bookshelf title={`${category}`} books={books.filter((b) => b.shelf === `${category}`)} />
+          ))
+        }
         </div>
       </div>
     );

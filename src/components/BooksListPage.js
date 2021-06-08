@@ -12,11 +12,12 @@ class BooksListPage extends Component {
 
   render() {
     const { title, books } = this.props;
-    
+    console.log(title)
+    console.log(books)
     return (
       <div className="list-books">
         <BookListPageTitle title={title} />
-        <ListContent content={books} />
+        <ListContent books={books} />
         <AddABook />
       </div>
     );
