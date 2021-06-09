@@ -4,13 +4,14 @@ import PropTypes from "prop-types";
 
 class BookTop extends Component {
   static propTypes = {
-    imageUrl: PropTypes.string.isRequired
+    book: PropTypes.object.isRequired,
+    onUpdate: PropTypes.func.isRequired,
   };
 
   render() {
-    const { imageUrl } = this.props;
+    const { book, onUpdate } = this.props;
 
-    console.log(imageUrl)
+    console.log(book.imageLinks.thumbnail)
     return (
       <div className="book-top">
         <div
@@ -18,10 +19,10 @@ class BookTop extends Component {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${imageUrl})`
+            backgroundImage: `url(${book.imageLinks.thumbnail})`
           }}
         />
-        <ShelfChanger />
+        <ShelfChanger book={book} onUpdate={onUpdate}/>
       </div>
     );
   }

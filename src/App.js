@@ -20,10 +20,10 @@ class BooksApp extends React.Component {
 
   componentDidMount() {
     BooksAPI.getAll().then((result) => {
-      console.log(result)
-      this.setState(() => ({ 
-        books: result
-       }));
+      console.log(result);
+      this.setState(() => ({
+        books: result,
+      }));
     });
   }
 
@@ -44,6 +44,21 @@ class BooksApp extends React.Component {
     this.setState({ showSearchPage: false });
   };
 
+  onAdd = () => {
+    //  TODO: fix this to work with the URL instead
+    this.setState({ showSearchPage: true });
+  };
+
+  onUpdate = (book) => {
+    console.log(`book to be updated is ${book.title}`)
+  }
+
+  categories = [
+    {id:"currentlyReading",title:"Currently Reading"},
+    {id:"wantToRead",title:"Want to Read"},
+    {id:"read",title:"Read"},
+  ]
+
   render() {
     return (
       <div className="app">
@@ -54,7 +69,13 @@ class BooksApp extends React.Component {
             results={this.state.searchResults}
           />
         ) : (
-          <BooksListPage title="MyReads" books={this.state.books} />
+          <BooksListPage
+            title="MyReads"
+            books={this.state.books}
+            categories={this.categories}
+            onAdd={this.onAdd}
+            onUpdate={this.onUpdate}
+          />
         )}
       </div>
     );

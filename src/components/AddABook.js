@@ -1,15 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class AddABook extends Component {
+  static propTypes = {
+    onAdd: PropTypes.func.isRequired,
+  };
+
   render() {
-      return(
-        <div className="open-search">
-          <button onClick={() => this.setState({ showSearchPage: true })}>
-            Add a book
-          </button>
-        </div>
-      )
+    const { onAdd } = this.props;
+
+    return (
+      <div className="open-search">
+        <button onClick={() => onAdd()}>Add a book</button>
+      </div>
+    );
   }
 }
 
-export default AddABook
+export default AddABook;

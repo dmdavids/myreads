@@ -5,17 +5,22 @@ import PropTypes from "prop-types";
 class Book extends Component {
   static propTypes = {
     book: PropTypes.object.isRequired,
+    onUpdate: PropTypes.func.isRequired,
   };
 
   render() {
-
-    const {book} = this.props
+    const { book, onUpdate } = this.props;
 
     return (
       <div className="book">
-        <BookTop imageUrl={book.imageLinks.thumbnail} />
+        <BookTop
+          book={book}
+          onUpdate={onUpdate}
+        />
         <div className="book-title">{book.title}</div>
-        <div className="book-authors">{book.authors}</div>
+        {book.authors.map((author) => (
+          <div className="book-authors" key={author}>{author}</div>
+        ))}
       </div>
     );
   }
