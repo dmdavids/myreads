@@ -19,7 +19,7 @@ class BooksApp extends React.Component {
   };
 
   componentDidMount() {
-    this.getAll()
+    this.getAll();
   }
 
   getAll = () => {
@@ -29,7 +29,7 @@ class BooksApp extends React.Component {
         books: result,
       }));
     });
-  }
+  };
 
   getBook = (bookId) => {
     BooksAPI.get(bookId).then((book) => {
@@ -37,21 +37,35 @@ class BooksApp extends React.Component {
     });
   };
 
-  search = (query) => {
-    BooksAPI.search(query).then((books) => {
-      this.setState(() => ({ searchResults: books }));
-    });
+  clearSearchResults = () => {
+    console.log("clearing query");
+    this.setState(() => ({ searchResults: [] }));
+  }
+
+  onSearchBooks = (query) => {
+    if (query === "") {
+      this.clearSearchResults()
+    } else {
+      BooksAPI.search(query).then((books) => {
+        console.log(books);
+        this.setState(() => ({ searchResults: books }));
+      });
+    }
+  };
+
+  testSearchBooks = (query) => {
+    console.log(`testing ...this is a test ${query}`);
   };
 
   update = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
-      this.getAll()
-    }
-    )
-  }
+      this.getAll();
+    });
+  };
 
   onSearchCompleted = () => {
     //  TODO: fix this to work with the URL instead
+    this.clearSearchResults()
     this.setState({ showSearchPage: false });
   };
 
@@ -61,15 +75,17 @@ class BooksApp extends React.Component {
   };
 
   onUpdate = (book) => {
-    console.log(`book to be updated is ${book.title} with shelf = ${book.shelf}`)
-    this.update(book, book.shelf)
-  }
+    console.log(
+      `book to be updated is ${book.title} with shelf = ${book.shelf}`
+    );
+    this.update(book, book.shelf);
+  };
 
   categories = [
-    {id:"currentlyReading",title:"Currently Reading"},
-    {id:"wantToRead",title:"Want to Read"},
-    {id:"read",title:"Read"},
-  ]
+    { id: "currentlyReading", title: "Currently Reading" },
+    { id: "wantToRead", title: "Want to Read" },
+    { id: "read", title: "Read" },
+  ];
 
   render() {
     return (
@@ -77,7 +93,8 @@ class BooksApp extends React.Component {
         {this.state.showSearchPage ? (
           <SearchPage
             onSearchCompleted={this.onSearchCompleted}
-            searchBooks={this.search}
+            onSearchBooks={this.onSearchBooks}
+            onUpdate={this.onUpdate}
             results={this.state.searchResults}
           />
         ) : (

@@ -13,8 +13,9 @@ class ShelfChanger extends Component {
   };
 
   handleChange(event) {
-      const updatedBook = { ...this.props.book, shelf: event.target.value };
-      this.props.onUpdate(updatedBook);
+    event.preventDefault();
+    const updatedBook = { ...this.props.book, shelf: event.target.value };
+    this.props.onUpdate(updatedBook);
   }
 
   render() {

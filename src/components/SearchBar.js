@@ -6,17 +6,17 @@ import PropTypes from "prop-types";
 class SearchBar extends Component {
   static propTypes = {
     onSearchCompleted: PropTypes.func.isRequired,
-    searchBooks: PropTypes.func.isRequired,
+    onSearchBooks: PropTypes.func.isRequired,
   };
 
   render() {
 
-    const { onSearchCompleted, searchBooks} = this.props;
+    const { onSearchCompleted, onSearchBooks} = this.props;
 
     return (
       <div className="search-books-bar">
         <SearchCloseButton onCompleted={ onSearchCompleted } />
-        <SearchInput onSearch={searchBooks} />
+        <SearchInput onSearchBooks={ onSearchBooks } />
       </div>
     );
   }

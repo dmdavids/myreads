@@ -1,21 +1,19 @@
 import React, { Component } from "react";
+import BooksGrid from "./BooksGrid"
 import PropTypes from "prop-types";
 
 class SearchResults extends Component {
   static propTypes = {
     results: PropTypes.array,
+    onUpdate: PropTypes.func.isRequired,
   };
 
   render() {
-    const { results } = this.props;
+    const { results, onUpdate } = this.props;
 
     return (
       <div className="search-books-results">
-        <ol className="books-grid">
-          {results.map((book) => (
-            <li key={book.id}>{book.title}</li>
-          ))}
-        </ol>
+          <BooksGrid books={results} onUpdate={onUpdate}/>
       </div>
     );
   }
