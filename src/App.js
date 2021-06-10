@@ -19,6 +19,10 @@ class BooksApp extends React.Component {
   };
 
   componentDidMount() {
+    this.getAll()
+  }
+
+  getAll = () => {
     BooksAPI.getAll().then((result) => {
       console.log(result);
       this.setState(() => ({
@@ -39,6 +43,13 @@ class BooksApp extends React.Component {
     });
   };
 
+  update = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      this.getAll()
+    }
+    )
+  }
+
   onSearchCompleted = () => {
     //  TODO: fix this to work with the URL instead
     this.setState({ showSearchPage: false });
@@ -50,7 +61,8 @@ class BooksApp extends React.Component {
   };
 
   onUpdate = (book) => {
-    console.log(`book to be updated is ${book.title}`)
+    console.log(`book to be updated is ${book.title} with shelf = ${book.shelf}`)
+    this.update(book, book.shelf)
   }
 
   categories = [
